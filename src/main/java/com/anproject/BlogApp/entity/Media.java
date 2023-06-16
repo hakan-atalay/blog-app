@@ -1,4 +1,4 @@
-package entity;
+package com.anproject.BlogApp.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,30 +6,31 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "approvals")
-public class Approval {
+@Table(name = "medias")
+public class Media {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "approve_info")
-    private boolean approveInfo;
-    @Column(name = "approve_date")
-    private Date approveDate;
+    @Column(name = "url")
+    private String url;
+    @Column(name = "file_name")
+    private String fileName;
+    @Column(name = "file_type")
+    private String fileType;
+    @Column(name= "status")
+    private boolean status;
+    @Column(name = "created_date")
+    private Date createdDate;
 
     @ManyToOne
     @JoinColumn(name = "news_id")
     private News newsId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User userId;
 }

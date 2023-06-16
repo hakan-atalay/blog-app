@@ -1,11 +1,9 @@
-package entity;
+package com.anproject.BlogApp.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter

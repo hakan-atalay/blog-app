@@ -1,6 +1,6 @@
-package repository;
+package com.anproject.BlogApp.repository;
 
-import entity.Category;
+import com.anproject.BlogApp.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

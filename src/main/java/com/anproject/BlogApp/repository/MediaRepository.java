@@ -1,7 +1,7 @@
-package repository;
+package com.anproject.BlogApp.repository;
 
-import entity.Media;
-import entity.News;
+import com.anproject.BlogApp.entity.Media;
+import com.anproject.BlogApp.entity.News;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
