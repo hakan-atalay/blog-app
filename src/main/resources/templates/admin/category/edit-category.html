@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+  <title>Kategori Güncelle</title>
+</head>
+<body>
+<header>
+  <div th:insert="~{fragments/sidebar}"/>
+</header>
+  <section class="home-content">
+    <div style="margin-left: 350px; margin-right: 350px; text-align: center">
+      <h5>Kategori Güncelle</h5>
+      <div>
+        <form th:action="@{/admin/add-category}" method="post" th:object="${category}">
+          <div>
+            <input type="hidden" th:field="*{id}" />
+            <div class="mb-3">
+              <input type="text" th:field="*{categoryName}" class="form-control" placeholder="Kategori giriniz">
+            </div>
+            <button type="submit" class="btn btn-success">Güncelle</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

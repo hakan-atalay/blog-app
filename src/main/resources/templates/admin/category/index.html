@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+  <title>Kategori Ekle</title>
+</head>
+<body>
+  <header>
+    <div th:insert="~{fragments/sidebar}"/>
+  </header>
+  <section class="home-content">
+    <div style="text-align: center">
+      <h5>Kategoriler</h5>
+      <a class="btn btn-outline-primary" th:href="@{/admin/category/add-category}">Kategori Ekle</a>
+      <div id="sideContain">
+        <table style="margin-top: 10px" class="table table-striped table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Kategori Ad</th>
+            <th scope="col">İşlem Yap</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="category: ${category}">
+            <th th:text="${category.id}"/>
+            <td th:text="${category.categoryName}"/>
+            <td>
+              <a th:href="@{/admin/category/edit-category/{id}(id=${category.id})}" class="btn btn-warning">Güncelle</a>
+              <a onclick="return confirm('İşlemi onaylıyor musunuz ?')" th:href="@{/admin/category/edit-delete/{id}(id=${category.id})}" class="btn btn-danger">Delete</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

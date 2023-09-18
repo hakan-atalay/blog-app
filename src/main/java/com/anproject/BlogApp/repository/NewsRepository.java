@@ -9,6 +9,4 @@ import java.util.List;
 
 @Repository
 public interface NewsRepository extends JpaRepository<News, Long> {
-    News getNewsById(long id);
-    List<User> getNewsByUser(User user);
 }

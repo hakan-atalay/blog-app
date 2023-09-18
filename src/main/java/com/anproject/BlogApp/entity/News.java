@@ -2,6 +2,7 @@ package com.anproject.BlogApp.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.util.*;
 
@@ -20,33 +21,33 @@ public class News {
     private String title;
     @Column(name = "contents")
     private String contents;
-    @Column(name = "crated_date")
+    @Column(name = "photos")
+    private String photos;
+    @Column(name = "created_date")
     private Date createdDate;
     @Column(name = "status")
     private boolean status;
 
-    @ManyToMany(mappedBy = "categories")
-    private List<News> news = new ArrayList<>();
-
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User user;
 
-    @OneToMany(mappedBy = "newsId")
+    @OneToMany(mappedBy = "news")
     private List<Paraphrase> paraphrases = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.DETACH)
-    @JoinTable(name = "caterogies_news",
+    @JoinTable(name = "categories_news",
             joinColumns = @JoinColumn(name = "news_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
     private List<Category> categories = new ArrayList<>();
 
-    @OneToMany(mappedBy = "newsId")
-    private List<Media> medias = new ArrayList<>();
-
-    @OneToMany(mappedBy = "newsId")
+    @OneToMany(mappedBy = "news")
     private List<Approval> approvals = new ArrayList<>();
 
-    @OneToOne(mappedBy = "newsId")
-    private Slider slider;
+    @Transient
+    public String getPhotosImagePath() {
+        if (photos == null || id == null) return null;
+        return "/news-photos/" + id + "/" + photos;
+    }
+
 }

@@ -19,8 +19,6 @@ public class Category {
     private Long id;
     @Column(name = "category_name")
     private String categoryName;
-    @Column(name = "description")
-    private String description;
 
     @ManyToMany(mappedBy = "categories")
     private List<News> news = new ArrayList<>();

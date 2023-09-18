@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(173, 198, 248);
+}
+
+.container{
+    position: relative;
+    max-width: 400px;
+    width: 100%;
+    border-radius: 10px;
+    background: white;
+    box-shadow:0 5px 10px rgba(0, 0, 0, 0.1) ;
+}
+
+.container .form{
+    padding: 40px;
+
+}
+
+.container .form .title{
+    position: relative;
+    font-size: 27px;
+    font-weight: 600;
+
+}
+.form .title::before{
+    content: ' ';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background-color: hsla(300, 35%, 39%, 0.544);
+    border-radius: 25px;
+
+}
+
+.form .input-field{
+    position: relative;
+    height:50px;
+    width: 100%;
+    margin-top: 30px;
+
+}
+
+.input-field input{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0 35px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-bottom: solid #ccc;
+    border-top: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.input-field input:is(:focus, :valid){
+    border-bottom-color: hsla(300, 35%, 39%, 0.544);
+}
+
+
+.input-field i{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 23px;
+}
+
+.input-field input:is(:focus, :valid) ~ i{
+    color: hsla(300, 35%, 39%, 0.544);
+}
+
+.input-field i.gosterGizleSf{
+    width: 10px;
+
+    margin-left: 285px;
+}
+
+.form .checkbox-text{
+    display: flex;
+    align-items: center;
+
+    margin-top: 20px;
+}
+
+.checkbox-text .checkbox-content{
+    display: flex;
+
+    align-items: center;
+}
+
+.checkbox-content input{
+    margin-left: 0px 8px 0px 4px;
+    accent-color: rgba(241, 212, 176, 0.959);
+
+}
+
+.form .button input{
+    background-color: rgb(232, 210, 252);
+    border-radius: 10px;
+    letter-spacing: 1px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button input:hover{
+    background-color:hsla(300, 35%, 39%, 0.544);
+
+}
+
+.form .giris-kayit{
+    margin-top: 30px;
+}
+
+.burak:checked::after{
+    background-color: #0e91e9;
+}
+
+
+
+
+
+
+

@@ -23,9 +23,9 @@ public class Paraphrase {
 
     @ManyToOne
     @JoinColumn(name = "news_id")
-    private News newsId;
+    private News news;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User user;
 }

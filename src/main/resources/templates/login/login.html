@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel ="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Giriş</title>
+</head>
+<body>
+<div class = "container">
+    <div class="forms">
+        <div class="form giriş">
+            <span class = "title">Giriş</span>
+            <form th:action="@{/login}" th:method="post">
+                <div class = "input-field">
+                    <input type="text" name="nickname" placeholder="Kullanıcı Adını Giriniz" required>
+                    <i class ="uil uil-envelope icon"></i>
+                </div>
+                <div class = "input-field">
+                    <input type="password" name="password" placeholder="Şifrenizi Giriniz" required>
+                    <i class ="uil uil-lock icon"></i>
+                    <i class ="uil uil-eye-slash gosterGizleSf"></i>
+                </div>
+                <div class = "input-field button">
+                    <input type="submit" class="girisButton" value="Giris"></input>
+                </div>
+            </form>
+            <div class="giris-kayit">
+                <span class="text">Üye Değil misiniz?</span>
+                <a th:href="@{/login/register}" class="text giris-text">Kayıt Ol</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

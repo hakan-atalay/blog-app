@@ -32,17 +32,15 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    private Role roleId;
+    private Role role;
 
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "user")
     private List<News> news = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "user")
     private List<Paraphrase> paraphrases = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "user")
     private List<Approval> approvals = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userId")
-    private List<Slider> sliders = new ArrayList<>();
 }

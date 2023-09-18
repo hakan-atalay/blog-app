@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel ="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Kaydol</title>
+</head>
+<body>
+<div class = "container">
+    <div class="forms">
+        <div class="form kayit">
+            <span class = "title">Kayıt Ol</span>
+            <form th:action="@{/login/registration-process}" method="post" th:object="${user}">
+                <div class = "input-field">
+                    <input type="text" th:field="*{firstName}"  placeholder="Adınızı Giriniz" required>
+                    <i class ="uil uil-user"></i>
+                </div>
+                <div class = "input-field">
+                    <input type="text" th:field = "*{lastName}" placeholder="Soyadınızı Giriniz" required>
+                    <i class ="uil uil-user"></i>
+                </div>
+                <div class = "input-field">
+                    <input type="text" th:field = "*{nickname}"placeholder="Kullanıcı adınızı oluşturun." required>
+                    <i class ="uil uil-user"></i>
+                </div>
+                <div class = "input-field">
+                    <input type="text" th:field = "*{email}"placeholder="Email adresinizi girin." required>
+                    <i class ="uil uil-user"></i>
+                </div>
+                <div class = "input-field">
+                    <input type="password" th:field = "*{password}" placeholder="Şifrenizi oluşturun." required>
+                    <i class ="uil uil-lock icon"></i>
+                    <i class ="uil uil-eye-slash gosterGizleSf"></i>
+                </div>
+                <div class = "input-field button">
+                    <button type="submit" style="background-color: bisque;border-radius: 10px;position: absolute;height: 100%;width: 100%;padding: 0 35px;border: none;outline: none;font-size: 16px;border-bottom: solid #ccc;border-top: 2px solid transparent;transition: all 0.2s ease;"> Kayıt Ol</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
