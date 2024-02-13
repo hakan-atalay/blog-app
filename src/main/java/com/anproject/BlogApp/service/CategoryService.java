@@ -5,6 +5,8 @@ import com.anproject.BlogApp.payload.request.CategoryRequestDto;
 import com.anproject.BlogApp.payload.response.CategoryResponseDto;
 import com.anproject.BlogApp.repository.CategoryRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryService {
 
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
@@ -22,15 +24,12 @@ public class CategoryService {
     public CategoryResponseDto getById(Long id){
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Kategori bulunamadı."));
-        CategoryResponseDto responseDto = new CategoryResponseDto();
-        responseDto.setId(category.getId());
-        responseDto.setCategoryName(category.getCategoryName());
-        return responseDto;
+        CategoryResponseDto categoryResponseDto = CategoryResponseDto.mapEntitytoResponseDto(category);
+        return categoryResponseDto;
     }
 
     public void save(CategoryRequestDto categoryRequestDto){
         Category category = CategoryRequestDto.mapRequestDtoToEntity(categoryRequestDto);
-        category.setCategoryName(category.getCategoryName());
         categoryRepository.save(category);
     }
 
@@ -44,6 +43,11 @@ public class CategoryService {
 
     public void deleteCategory(long id){
         categoryRepository.deleteById(id);
+    }
+
+    public Page<CategoryResponseDto> findByNameContains(Pageable pageable){
+        Page category = categoryRepository.findAllCategoriesWithOptional(pageable);
+        return category;
     }
 
 }

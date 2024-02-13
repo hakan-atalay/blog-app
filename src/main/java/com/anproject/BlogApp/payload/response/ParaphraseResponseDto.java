@@ -17,7 +17,6 @@ import java.util.Date;
 public class ParaphraseResponseDto {
     private Long id;
     private String contents;
-    private Date createdDate;
 
     private News news;
     private User user;
@@ -26,7 +25,6 @@ public class ParaphraseResponseDto {
         return ParaphraseResponseDto.builder()
                 .id(paraphrase.getId())
                 .contents(paraphrase.getContents())
-                .createdDate(paraphrase.getCreatedDate())
                 .news(paraphrase.getNews())
                 .user(paraphrase.getUser())
                 .build();

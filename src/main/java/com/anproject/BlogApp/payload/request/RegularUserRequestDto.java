@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class RegularUserRequestDto {
-
     private String firstName;
     private String lastName;
     private String nickname;

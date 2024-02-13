@@ -17,7 +17,6 @@ public class NewsResponseDto {
     private Long id;
     private String title;
     private String contents;
-    private Date createdDate;
 
     private User user;
 
@@ -26,7 +25,6 @@ public class NewsResponseDto {
                 .id(news.getId())
                 .title(news.getTitle())
                 .contents(news.getContents())
-                .createdDate(news.getCreatedDate())
                 .build();
     }
 }

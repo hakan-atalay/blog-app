@@ -3,11 +3,14 @@ package com.anproject.BlogApp.controller;
 import com.anproject.BlogApp.payload.request.CategoryRequestDto;
 import com.anproject.BlogApp.payload.response.CategoryResponseDto;
 import com.anproject.BlogApp.service.CategoryService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -20,8 +23,15 @@ public class CategoryController {
     }
 
     @GetMapping("/admin/category/index")
-    public String showCategoryPage(Model model){
-        model.addAttribute("category", categoryService.getAllCategories());
+    public String findAllPage(
+            @RequestParam(value = "page", required = false, defaultValue = "0") int pageNumber,
+            @RequestParam(value = "size", required = false, defaultValue = "5") int size,
+            Model model) {
+        Page<CategoryResponseDto> categoryPage = categoryService.findByNameContains(PageRequest.of(pageNumber, size));
+        model.addAttribute("categories", categoryPage.getContent());
+        model.addAttribute("pages", new int[categoryPage.getTotalPages()]);
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("category", categoryPage);
         return "/admin/category/index";
     }
 

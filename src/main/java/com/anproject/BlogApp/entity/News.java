@@ -2,7 +2,6 @@ package com.anproject.BlogApp.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.util.*;
 
@@ -19,7 +18,7 @@ public class News {
     private Long id;
     @Column(name = "title")
     private String title;
-    @Column(name = "contents")
+    @Column(columnDefinition = "TEXT", name = "contents")
     private String contents;
     @Column(name = "photos")
     private String photos;
