@@ -26,4 +26,5 @@ public class RegularUserRequestDto {
                 .password(requestDto.password)
                 .build();
     }
+
 }

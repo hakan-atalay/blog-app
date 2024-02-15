@@ -7,8 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +15,7 @@ public class NewsResponseDto {
     private Long id;
     private String title;
     private String contents;
-
+    private String photos;
     private User user;
 
     public static NewsResponseDto mapEntityToResponseDto(News news){
@@ -25,6 +23,9 @@ public class NewsResponseDto {
                 .id(news.getId())
                 .title(news.getTitle())
                 .contents(news.getContents())
+                .photos(news.getPhotosImagePath())
+                .user(news.getUser())
                 .build();
     }
+
 }

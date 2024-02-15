@@ -20,4 +20,5 @@ public class CategoryResponseDto {
                 .categoryName(category.getCategoryName())
                 .build();
     }
+
 }

@@ -12,25 +12,58 @@
     <header>
         <div th:insert="~{fragments/navbar}"/>
     </header>
-    <div style="margin: 50px">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <div class="card">
-                    <img src="https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">kategori</h5>
-                        <p class="card-text">başlık</p>
+    <div sec:authorize="isAuthenticated()">
+        <div class="d-flex justify-content-center" style="margin: 25px">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Kategori Seç
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" type="button" th:href="@{/home/index}">Hepsi</a></li>
+                    <div th:each="category : ${categoryList}">
+                        <li><a class="dropdown-item" type="button" th:href="@{/news/category-news/{categoryId}(categoryId=${category.id})}" th:text="${category.getCategoryName()}"></a></li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <div th:each="categorynews : ${categoryNewsList}">
+            <div style="margin: 25px auto; max-width: 540px;">
+                <a th:href="@{/news/news-content/{newsId}(newsId=${categorynews.news.getId()})}" style="text-decoration: none; color: inherit;">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img th:src="@{${categorynews.news.getPhotosImagePath()}}" class="img-fluid rounded-start">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 th:text="${categorynews.category.getCategoryName()}" class="card-title"></h5>
+                                <p th:text="${categorynews.news.getTitle()}" class="card-text"></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card">
-                    <img src="https://th.bing.com/th/id/OIG.MxQxUggA0RKmKdTjwAqw" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">kategori</h5>
-                        <p class="card-text">başlık</p>
+        </div>
+    </div>
+    <div sec:authorize="!isAuthenticated()">
+        <div th:each="categorynews : ${categoryNewsList}">
+            <div style="margin: 25px auto; max-width: 540px;">
+                <a th:href="@{/templates/login}" style="text-decoration: none; color: inherit;">
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC4BhzbgckL9REn4XvFLs9TrmvuijFow0_v89H-5lX1Fj6xS5s55eriP24d4LyWmazKAg&usqp=CAU" class="img-fluid rounded-start">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 th:text="${categorynews.category.getCategoryName()}" class="card-title"></h5>
+                                    <p th:text="${categorynews.news.getTitle()}" class="card-text"></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>

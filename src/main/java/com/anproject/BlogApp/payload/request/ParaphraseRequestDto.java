@@ -1,5 +1,6 @@
 package com.anproject.BlogApp.payload.request;
 
+import com.anproject.BlogApp.entity.CustomUserDetail;
 import com.anproject.BlogApp.entity.News;
 import com.anproject.BlogApp.entity.Paraphrase;
 import com.anproject.BlogApp.entity.User;
@@ -18,11 +19,12 @@ public class ParaphraseRequestDto {
     private User user;
     private News news;
 
-    public static Paraphrase mapRequestDtoToEntity(ParaphraseRequestDto requestDto){
+    public static Paraphrase mapRequestDtoToEntity(ParaphraseRequestDto requestDto, CustomUserDetail user){
         return Paraphrase.builder()
                 .contents(requestDto.getContents())
-                .user(requestDto.getUser())
+                .user(user.getUser())
                 .news(requestDto.getNews())
                 .build();
     }
+
 }

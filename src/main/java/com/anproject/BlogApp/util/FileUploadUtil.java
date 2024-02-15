@@ -25,4 +25,5 @@ public class FileUploadUtil {
             throw new IOException("Resim dosyası kaydedilmedi: " + fileName, ioe);
         }
     }
+
 }

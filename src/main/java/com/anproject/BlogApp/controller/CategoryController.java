@@ -3,6 +3,7 @@ package com.anproject.BlogApp.controller;
 import com.anproject.BlogApp.payload.request.CategoryRequestDto;
 import com.anproject.BlogApp.payload.response.CategoryResponseDto;
 import com.anproject.BlogApp.service.CategoryService;
+import com.anproject.BlogApp.service.NewsService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -12,14 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 public class CategoryController {
 
     CategoryService categoryService;
+    NewsService newsService;
 
-    public CategoryController(CategoryService categoryService) {
+    public CategoryController(CategoryService categoryService, NewsService newsService) {
         this.categoryService = categoryService;
+        this.newsService = newsService;
     }
 
     @GetMapping("/admin/category/index")
@@ -58,6 +60,14 @@ public class CategoryController {
     public String deleteCategory(@PathVariable(value = "id") long id){
         categoryService.deleteCategory(id);
         return "redirect:/admin/category/index";
+    }
+
+    @GetMapping("/news/category-news/{categoryId}")
+    public String getCategoryNews(@PathVariable("categoryId") Long categoryId, Model model){
+        //List<NewsResponseDto> newsResponseDtoList = newsService.getNewsByCategoryId(categoryId);
+        model.addAttribute("newsList", newsService.getNewsByCategoryId(categoryId));
+        model.addAttribute("categoryList", categoryService.getAllCategories());
+        return "/news/category-news";
     }
 
 }

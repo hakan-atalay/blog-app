@@ -2,41 +2,25 @@
 <html lang="tr" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <div class="container-fluid">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/home/index}" >AnProject</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-          <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="mynavbar">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)">Anime</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)">Manga</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)">Oyun</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)">Dizi ve Film</a>
-            </li>
-          </ul>
-          <div class="d-flex">
-            <div sec:authorize="!isAuthenticated()">
-              <a th:href="@{/templates/login}" class="btn btn-primary">Giriş</a>
-              <a th:href="@{/login/register}" class="btn btn-primary">Kaydol</a>
+            <div class="d-flex">
+                <div sec:authorize="!isAuthenticated()">
+                    <a th:href="@{/templates/login}" class="btn btn-primary">Giriş</a>
+                    <a th:href="@{/login/register}" class="btn btn-primary">Kaydol</a>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                    <a th:href="@{/home/add-news}" class="btn btn-primary">İçerik Ekle</a>
+                    <a th:href="@{/logout}" class="btn btn-primary">Çıkış</a>
+                </div>
+                <div class="ms-1" sec:authorize="hasAuthority('ADMIN')">
+                    <a th:href="@{/admin/index}" class="btn btn-primary">Admin</a>
+                </div>
             </div>
-            <div sec:authorize="isAuthenticated()">
-              <a th:href="@{/home/add-news}" class="btn btn-primary">İçerik Ekle</a>
-              <a th:href="@{/logout}" class="btn btn-primary">Çıkış</a>
-            </div>
-            <div class="ms-1" sec:authorize="hasAuthority('ADMIN')">
-              <a th:href="@{/admin/index}" class="btn btn-primary">Admin</a>
-            </div>
-          </div>
-        </div>
-      </div>
-  </nav>
+    </div>
+</nav>
 </html>

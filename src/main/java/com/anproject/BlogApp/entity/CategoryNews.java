@@ -27,4 +27,5 @@ public class CategoryNews {
         this.category = category;
         this.news = news;
     }
+
 }
