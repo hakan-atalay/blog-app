@@ -26,41 +26,18 @@
     <div class="container my-5 py-5">
         <button onclick="openCommentModal()" class="btn btn-primary">Yorum Yap</button>
         <div class="row d-flex justify-content-center">
-            <div class="col-md-12 col-lg-10 col-xl-8">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex flex-start align-items-center">
-                            <div>
-                                <h6 class="fw-bold text-primary mb-1">Lily Coleman</h6>
-                                <p class="text-muted small mb-0">
-                                    Shared publicly - Jan 2020
-                                </p>
+            <div th:each="commentOfTheNews : ${paraphraseList}">
+                <div class="col-md-12 col-lg-10 col-xl-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-start align-items-center">
+                                <div>
+                                    <h6 th:text="${commentOfTheNews.user.getFirstName()} + ' ' + ${commentOfTheNews.user.getLastName()}" class="fw-bold text-primary mb-1"></h6>
+                                    <p th:text="${commentOfTheNews.getCreatedDate()}" class="text-muted small mb-0"></p>
+                                </div>
                             </div>
+                            <p class="mt-3 mb-4 pb-2" th:text="${commentOfTheNews.getContents()}"></p>
                         </div>
-                        <p class="mt-3 mb-4 pb-2">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip consequat.
-                        </p>
-                </div>
-            </div>
-        </div>
-            <div class="col-md-12 col-lg-10 col-xl-8">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex flex-start align-items-center">
-                            <div>
-                                <h6 class="fw-bold text-primary mb-1">Lily Coleman</h6>
-                                <p class="text-muted small mb-0">
-                                    Shared publicly - Jan 2020
-                                </p>
-                            </div>
-                        </div>
-                        <p class="mt-3 mb-4 pb-2">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip consequat.
-                        </p>
                     </div>
                 </div>
             </div>

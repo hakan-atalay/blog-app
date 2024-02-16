@@ -7,6 +7,7 @@ import com.anproject.BlogApp.payload.response.CategoryNewsResponseDto;
 import com.anproject.BlogApp.repository.CategoryNewsRepository;
 import com.anproject.BlogApp.repository.CategoryRepository;
 import com.anproject.BlogApp.repository.NewsRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class CategoryNewsService {
     }
 
     public List<CategoryNewsResponseDto> getAllCategoryNews(){
-        List<CategoryNews> categoryNewsList = categoryNewsRepository.findAll();
+        List<CategoryNews> categoryNewsList = categoryNewsRepository.findByNewsStatusTrue(Sort.by(Sort.Direction.DESC, "id"));
         List<CategoryNewsResponseDto> categoryNewsResponseDtoList = categoryNewsList.stream()
                 .map(CategoryNews -> CategoryNewsResponseDto.mapEntitytoResponseDto(CategoryNews))
                 .collect(Collectors.toList());

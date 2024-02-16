@@ -45,17 +45,11 @@ public class NewsService {
     }
 
     public List<NewsResponseDto> getNewsByCategoryId(Long categoryId){
-        List<News> newsList = categoryNewsRepository.findNewsByCategoryId(categoryId);
+        List<News> newsList = categoryNewsRepository.findActiveNewsByCategoryId(categoryId);
         List<NewsResponseDto> newsResponseDtoList = newsList.stream()
                 .map(news -> NewsResponseDto.mapEntityToResponseDto(news))
                 .collect(Collectors.toList());
         return newsResponseDtoList;
-    }
-
-    public NewsResponseDto getById(Long newsId){
-        News news = newsRepository.findById(newsId).orElseThrow();
-        NewsResponseDto newsResponseDto = NewsResponseDto.mapEntityToResponseDto(news);
-        return newsResponseDto;
     }
 
 }

@@ -64,7 +64,6 @@ public class CategoryController {
 
     @GetMapping("/news/category-news/{categoryId}")
     public String getCategoryNews(@PathVariable("categoryId") Long categoryId, Model model){
-        //List<NewsResponseDto> newsResponseDtoList = newsService.getNewsByCategoryId(categoryId);
         model.addAttribute("newsList", newsService.getNewsByCategoryId(categoryId));
         model.addAttribute("categoryList", categoryService.getAllCategories());
         return "/news/category-news";

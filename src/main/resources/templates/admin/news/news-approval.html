@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Haber Onay</title>
+</head>
+<body>
+<header>
+    <div th:insert="~{fragments/sidebar}"/>
+</header>
+<section class="home-content">
+    <div style="text-align: center">
+        <h5>Haber Onay</h5>
+        <div id="sideContain">
+            <table style="margin-top: 10px" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">Haber Başlık</th>
+                    <th scope="col">Yazar</th>
+                    <th scope="col">Onayla</th>
+                    <th scope="col">Onay Tarih</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="approval: ${approvalList}">
+                    <td th:text="${approval.getNews().getTitle()}"/>
+                    <td th:text="${approval.getUser().getFirstName()} + ' ' + ${approval.getUser().getLastName()}"/>
+                    <td style="text-align: center">
+                            <div style="display: flex; justify-content: center;" class="form-check form-switch">
+                                <input class="approval-checkbox" th:data-approval-id="${approval.getId()}" name="test" type="checkbox"
+                                       th:checked="${approval.isApproveInfo()}"/>
+                            </div>
+                    </td>
+                    <td th:text="${approval.getApproveDate()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function () {
+        $('.approval-checkbox').change(function () {
+            var approvalId = parseInt($(this).data('approval-id'));
+            var isChecked =  $(this).is(':checked');
+            $.ajax({
+                type: 'POST',
+                url: '/admin/news/approval-status',
+                data: {
+                    approvalId: approvalId,
+                    isChecked: isChecked
+                }
+            });
+        });
+    });
+    $(document).ready(function(){
+        $('.approval-checkbox').change(function(){
+            setTimeout(function(){
+                location.reload();
+            }, 500);
+        });
+    });
+</script>
+</body>
+</html>

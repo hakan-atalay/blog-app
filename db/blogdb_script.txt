@@ -1,0 +1,92 @@
+create table roles(
+	id serial primary key,
+	role_name varchar(10) unique 
+);
+
+create table users(
+	id serial primary key,
+	role_id int,
+	first_name varchar(50),
+	last_name varchar(50),
+	nickname varchar(50) unique,
+	email varchar(50) unique,
+	password varchar(255),
+	status boolean,
+	foreign key (role_id) references roles(id) 
+	on update cascade 
+	on delete cascade
+);
+
+create table categories(
+	id serial primary key,
+	category_name varchar(50)
+);
+
+create table news(
+	id serial primary key,
+	user_id int,
+	title varchar(255),
+	contents text,
+	photos varchar(255),
+	created_date timestamp,
+	status boolean,
+	foreign key (user_id) references users(id) 
+	on update cascade 
+	on delete cascade
+);
+
+create table paraphrase(
+	id serial primary key,
+	news_id int,
+	user_id int,
+	contents varchar(255),
+	created_date timestamp,
+	foreign key(news_id) references news(id) 
+	on update cascade 
+	on delete cascade,
+	foreign key(user_id) references users(id) 
+	on update cascade 
+	on delete cascade
+);
+
+create table categories_news(
+	id serial primary key,
+	news_id int,
+	category_id int,
+	foreign key(news_id) references news(id) 
+	on update cascade 
+	on delete cascade,
+	foreign key(category_id) references categories(id) 
+	on update cascade 
+	on delete cascade
+);
+
+create table approvals(
+	id serial primary key,
+	news_id int,
+	user_id int,
+	approve_info boolean,
+	approve_date timestamp,
+	foreign key(news_id) references news(id) 
+	on update cascade 
+	on delete cascade,
+	foreign key(user_id) references users(id) 
+	on update cascade 
+	on delete cascade
+);
+
+insert into roles (role_name) values ('ADMIN');
+insert into roles (role_name) values ('USER');
+
+insert into users (role_id, first_name, last_name, nickname, email, password, status)
+values (1, 'first', 'last', 'admin', 'admin@gmail.com', '$2a$12$bujUklajUBNbdfAwvGqGaOYH51dAoX7EVP4fEWZ.GzatD7Dxn6F1C', 
+true);
+
+insert into users (role_id, first_name, last_name, nickname, email, password, status)
+values (2, 'first', 'last', 'user', 'user@gmail.com','$2a$12$yXzJQIaOAU8688N0nPzA0eHGYXR7kWqW0NLMHmGUhb4RCcTDkpFVe', 
+true);
+
+insert into categories (category_name) values ('Oyun');
+insert into categories (category_name) values ('Anime');
+insert into categories (category_name) values ('Dizi');
+insert into categories (category_name) values ('Film');

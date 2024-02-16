@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,6 +17,7 @@ import lombok.NoArgsConstructor;
 public class ParaphraseResponseDto {
     private Long id;
     private String contents;
+    private Date createdDate;
 
     private News news;
     private User user;
@@ -25,6 +28,7 @@ public class ParaphraseResponseDto {
                 .contents(paraphrase.getContents())
                 .news(paraphrase.getNews())
                 .user(paraphrase.getUser())
+                .createdDate(paraphrase.getCreatedDate())
                 .build();
     }
 

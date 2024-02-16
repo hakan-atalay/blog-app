@@ -5,10 +5,7 @@ import com.anproject.BlogApp.payload.request.NewsRequestDto;
 import com.anproject.BlogApp.payload.request.ParaphraseRequestDto;
 import com.anproject.BlogApp.payload.response.CategoryResponseDto;
 import com.anproject.BlogApp.payload.response.NewsResponseDto;
-import com.anproject.BlogApp.service.CategoryNewsService;
-import com.anproject.BlogApp.service.CategoryService;
-import com.anproject.BlogApp.service.NewsService;
-import com.anproject.BlogApp.service.ParaphraseService;
+import com.anproject.BlogApp.service.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,12 +22,14 @@ public class NewsController {
     private final CategoryService categoryService;
     private final CategoryNewsService categoryNewsService;
     private final ParaphraseService paraphraseService;
+    private final ApprovalService approvalsService;
 
-    public NewsController(NewsService newsService, CategoryService categoryService, CategoryNewsService categoryNewsService, ParaphraseService paraphraseService) {
+    public NewsController(NewsService newsService, CategoryService categoryService, CategoryNewsService categoryNewsService, ParaphraseService paraphraseService, ApprovalService approvalsService) {
         this.newsService = newsService;
         this.categoryService = categoryService;
         this.categoryNewsService = categoryNewsService;
         this.paraphraseService = paraphraseService;
+        this.approvalsService = approvalsService;
     }
 
     @GetMapping("/home/add-news")
@@ -48,6 +47,7 @@ public class NewsController {
                                  @RequestParam("image") MultipartFile multipartFile) {
        NewsResponseDto savedNews = newsService.save(news, user, multipartFile);
        categoryNewsService.save(savedNews.getId(), categoryId);
+       approvalsService.save(savedNews.getId());
        return "redirect:/home/index";
     }
 
@@ -55,6 +55,7 @@ public class NewsController {
     public String showNewsContent(@PathVariable("newsId") Long newsId, Model model){
         model.addAttribute("newsContent", categoryNewsService.getById(newsId));
         model.addAttribute("paraphrase", new ParaphraseRequestDto());
+        model.addAttribute("paraphraseList", paraphraseService.getByNewsId(newsId));
         return "news/news-content";
     }
 
